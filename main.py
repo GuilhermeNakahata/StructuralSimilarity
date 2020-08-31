@@ -2,6 +2,8 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
+from skimage.measure import compare_ssim
+
 # https://ourcodeworld.com/articles/read/991/how-to-calculate-the-structural-similarity-index-ssim-between-two-images-with-python
 
 print("Iniciando Verificacao")
@@ -15,10 +17,12 @@ for i in range(1,6):
         grayB = cv2.cvtColor(imageB, cv2.COLOR_BGR2GRAY)
         err = np.sum((imageA.astype("float") - imageB.astype("float")) ** 2)
         err /= float(imageA.shape[0] * imageA.shape[1])
+        (score, diff) = compare_ssim(grayA, grayB, full=True)
+        fig, ax = plt.subplots(1,2, figsize=(15, 15), squeeze=False)
         print(err)
-        fig, ax = plt.subplots(1,3, figsize=(15, 15), squeeze=False)
+        print(score)
+        fig.suptitle("MSE: {:.2f}".format(err) + " SSIM: {:.2f}".format(score), fontsize=14)
         ax[0][0].imshow(imageA)
         ax[0][1].imshow(imageB)
-        ax[0][2].imshow(imageB)
         plt.show()
 
