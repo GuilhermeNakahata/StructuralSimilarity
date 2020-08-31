@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from skimage.measure import compare_ssim
 
 # https://ourcodeworld.com/articles/read/991/how-to-calculate-the-structural-similarity-index-ssim-between-two-images-with-python
+# https://www.pyimagesearch.com/2014/09/15/python-compare-two-images/
 
 print("Iniciando Verificacao")
 for i in range(1,6):
